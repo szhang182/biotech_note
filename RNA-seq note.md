@@ -1,3 +1,4 @@
+## Day 1 -善
 ## RNA-seq 笔记
 
 ### 1. 样品准备 (Sample Preparation)

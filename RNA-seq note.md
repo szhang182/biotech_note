@@ -36,7 +36,8 @@
 ### 8. 数据可视化 (Data Visualization)
 - ggplot2 进行差异表达的可视化。
     - [How to Use ggplot2-like libary in Python](https://towardsdatascience.com/how-to-use-ggplot2-in-python-74ab8adec129) plotnine is a Python package allowing you to use ggplot2-like code that is implementing the grammar of graphics
-    -  ```
-    -  # installation
-    -   conda install -c conda-forge plotnine```
+  ```
+  ##installation
+  conda install -c conda-forge plotnine
+  ```
 - Gviz 或 IGV 对比对结果进行可视化。

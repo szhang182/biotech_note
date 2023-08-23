@@ -1,4 +1,4 @@
-# Linux note
+# Day2 -善 Linux note
 
 ### 文件和目录管理
 

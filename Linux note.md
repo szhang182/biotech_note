@@ -1,0 +1,82 @@
+# Linux note
+
+### 文件和目录管理
+
+- **cd** change directory
+    - - 上次所在目录
+    - . 当前目录
+    - .. 上级目录
+- **pwd** Print Working Directory
+- **ls** list
+    - -a 显示全部的文件，包括隐藏文件 (开头为 . 的文件)。
+    - -d 仅列出dir。
+    - -h 以易读的方式显示文件大小，如 1KB、234MB、2GB 等。
+    - -l 长格式列出文件和目录信息。
+    - -r 排序结果反向输出。
+    - -R 将该目录包括子目录下的所有文件都显示出来。
+    - -S 文件容量大小排序。
+    - -t 以时间排序。
+    - --full-time
+- **mkdir** make directories **rmdir** remove empty directories
+    - mkdir -p dir1/dir2/dir3
+    - mkdir -m 711 test2 自定义目录权限, default 755
+- **touch** 创建文件/修改时间参数
+    - -a：只修改文件的Access Time。
+    - -m：只修改文件的Modify Time。
+    - -c：仅修改文件的时间参数（3 个时间参数都改变），如果文件不存在，则不建立新文件。
+    - -d：把文件的 atime 和 mtime 时间改为指定的时间。
+        - touch -d "2023-08-22 15:44" dir1
+- **ln** link
+    - ext 文件系统中 一个文件的信息存在两个地方 inode: header info ,block: actual data
+    - -s 软链接：类似于 Windows 系统中给文件创建快捷方式，即产生一个特殊的文件，该文件用来指向另一个文件，此链接方式同样适用于目录。
+        - ln /root/dir1 /dir1_slink
+    - 硬链接：文件的基本信息都存储在 inode 中，而硬链接指的就是给一个文件的 inode 分配多个文件名，通过任何一个文件名，都可以找到此文件的 inode，从而读取该文件的数据信息。
+    - - f 如果目标文件已经存在，则删除目标文件后再建立链接文件
+- **cp** copy
+    - a：-d + -p + -r
+    - d：复制软连接的时候不加-d复制出来的是源文件，加了复制出来就是软链接文件
+    - p：复制后目标文件保留源文件的属性（包括所有者、所属组、权限和时间）；
+    - r：递归复制，用于复制目录；
+    - l：把目标文件建立为源文件的硬链接文件，而不是复制源文件；
+    - s：把目标文件建立为源文件的软链接文件，而不是复制源文件；
+- **rm** remove
+    - f force delete
+    - r recursively
+    - sudo rm -rf /*   — 吃牢饭
+- **mv** move
+    - f
+    - n 如果目标文件已经存在，则不会覆盖移动，而且不询问用户；
+    - v 显示文件或目录的移动过程；
+- tips
+    - 输入文件名时 Tab 两下自动补全
+    - * 任意数量的字符
+    - ? 任意一个字符
+    - [] 括号内的任意一个字符
+        - ls [abw]*
+        - ls [a-g]*
+
+### Vi
+
+- **基本操作**
+    - Find stuff
+        - /abc	从光标所在位置向前查找字符串 abc
+        - /^abc 查找以 abc 为行首的行
+        - /abc$ 查找以 abc 为行尾的行
+        - n 下一个
+        - N 上一个
+    - Replace
+        - :s/a1/a2/g 所在行中的所有 a1 用 a2 替换
+        - :n1,n2s/a1/a2/g 文件中 n1 到 n2 行中所有 a1 都用 a2 替换
+        - :g/a1/a2/g  文件中所有的 a1 都用 a2 替换
+    - Delete
+        - dd 所在行
+        - ndd	n行
+        - dG 所在行一直到文件末尾的所有内容
+    - save
+        - :wq	保存并退出
+        - :q	不保存就退出
+        - :w	保存但是不退出
+    - others
+        - :set number 显示行数
+        - ctrl + r redo
+        - u undo

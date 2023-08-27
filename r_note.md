@@ -1,4 +1,4 @@
-# R note
+Day 4,5,6 - 善 R note
 
 Basics 
 
@@ -79,3 +79,62 @@ DS
         - X$列名
             - 也可以提取列
 - List
+
+R包
+
+- install
+    - install.packages(“包”)
+    - BiocManager::install(“包”)
+- Load
+    - options("repos" = c(CRAN="[https://mirrors.tuna.tsinghua.edu.cn/CRAN/](https://mirrors.tuna.tsinghua.edu.cn/CRAN/)"))
+    - options(BioC_mirror="[https://mirrors.ustc.edu.cn/bioc/](https://mirrors.ustc.edu.cn/bioc/)")
+    - install.packages("dplyr")
+    - library(dplyr)
+
+5 basic functions
+
+- mutate(test, new = Sepal.Length * Sepal.Width)
+    - to add a new row
+- select()
+    - select by col number
+        - select(test,1)
+        - select(test,c(1,5))
+    - select by col name
+        - select(test, Petal.Length, Petal.Width)
+        - vars <- c("Petal.Length", "Petal.Width")
+        - select(test, one_of(vars))
+- filter()
+    - filter(test, Species == "setosa")
+    - filter(test, Species == "setosa"&Sepal.Length>5)
+    - filter(test, Species %in% c("setosa","versicolor"))
+- arrange() 就是sort ascending by default
+    - arrange(test, Sepal.Length)
+    - arrange(test, desc(Sepal.Length))
+- summarise()
+    - summarise(test, mean(Sepal.Length), sd(Sepal.Length)
+    - group_by(test, Species)
+    - summarise(group_by(test, Species),mean(Sepal.Length), sd(Sepal.Length))
+    
+
+dplyr实用技能
+
+- pipe  同linux pipe
+    - test %>%
+    - group_by(Species) %>%
+    - summarise(mean(Sepal.Length), sd(Sepal.Length))
+- count(test,Species)  count unique value
+
+join or bind tables
+
+- inner_join 同sql
+    - inner_join(test1, test2, by = "x")
+- left_join
+    - left_join(test1, test2, by = 'x')
+- full_join
+    - full_join( test1, test2, by = 'x')
+- semi_join 返回能够与y表匹配的x表所有记录
+    - semi_join(x = test1, y = test2, by = 'x')
+- anti_join 返回无法与y表匹配的x表的所记录
+    - anti_join(x = test2, y = test1, by = 'x')
+- bind_rows(test1, test2) 相当于append row
+- bind_cols(test1, test3) 相当于 append col
